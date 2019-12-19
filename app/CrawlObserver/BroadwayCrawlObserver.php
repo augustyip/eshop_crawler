@@ -9,8 +9,8 @@ use PHPHtmlParser\Dom;
 use App\Item;
 
 
-class SupremeCoCrawlObserver extends CrawlObserver {
-    private $shop_id = 1;
+class BroadwayCrawlObserver extends CrawlObserver {
+    private $shop_id = 2;
 
     /**
      * Called when the crawler will crawl the url.
@@ -34,38 +34,38 @@ class SupremeCoCrawlObserver extends CrawlObserver {
         ResponseInterface $response,
         ?UriInterface $foundOnUrl = null
     ) {
-
         $dom = new Dom;
         $dom->loadStr((string) $response->getBody(), []);
-        $product_items = $dom->find('div.ProductList-content div.product-item');
-        foreach($product_items as $product_item) {
-            $title_el = $product_item->find('div.title')[0];
-            $name = !empty($title_el) ? $title_el->text : NULL;
-            $price_el = $product_item->find('div.price')[0];
-            $price = !empty($price_el) ? $price_el->text : NULL;
-            if (!empty($price)) {
-                $item_url = $product_item->find('a.Product-item')[0]->getAttribute('href');
+        $product_items = $dom->find('div.product-item');
+        foreach($product_items as $el) {
 
-                $price = preg_replace( '/[^.\d]/', '', $price);
-                $parsed_url = parse_url($item_url);
-                $path = $parsed_url['path'];
+            $link_el = $el->find('a.product-item-link')[0];
+            $name = trim($link_el->text);
+            $link = $link_el->getAttribute('href');
+            $parsed_url = parse_url($link);
+            $path = $parsed_url['path'];
 
-                $hash = md5($path);
+            $price_el = $el->find('span.final-price-wrapper')[0];
+            $price = $price_el->getAttribute('data-price-amount');
 
-                $item = Item::firstOrCreate([
-                    'shop_id' => $this->shop_id,
-                    'hash' => $hash
-                ]);
+            $hash = md5($path);
 
-                if ($item->price != $price) {
-                    $item->name = $name;
-                    $item->path = $path;
-                    $item->original = $item->price ?? $price;
-                    $item->price = $price;
-                    $item->discount = round($item->price / $item->original, 2);
-                    $item->save();
-                }
+            $item = Item::firstOrCreate([
+                'shop_id' => $this->shop_id,
+                'hash' => $hash
+            ]);
+
+            if ($item->price != $price) {
+                $item->name = $name;
+                $item->path = $path;
+                $item->original = $item->price ?? $price;
+                $item->price = $price;
+                $item->discount = round($item->price / $item->original, 2);
+                $item->save();
             }
+            logger($name);
+            logger($price);
+            logger($path);
         }
     }
 

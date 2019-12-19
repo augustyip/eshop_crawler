@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\SupremeCoCrawler;
+use App\BroadwayCrawler;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,8 +28,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call(new SupremeCoCrawler)->twiceDaily(1, 13);
-        // $schedule->call(new SupremeCoCrawler);//->twiceDaily(1, 13);
+        $schedule->call(new SupremeCoCrawler)->dailyAt('01:00');
+        $schedule->call(new BroadwayCrawler)->dailyAt('02:00');
+        // $schedule->call(new BroadwayCrawler);//->twiceDaily(1, 13);
     }
 
     /**
