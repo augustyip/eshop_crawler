@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
 
-        /**
+    /**
      * Attributes that should be mass-assignable.
      *
      * @var array
@@ -20,6 +20,7 @@ class Item extends Model
         'discount',
         'url',
         'hash',
+        'path',
         'shop_id',
     ];
 
