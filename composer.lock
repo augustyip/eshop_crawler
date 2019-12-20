@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb4d91e13481582c1a2437dbdedfa884",
+    "content-hash": "f595fc2908e33d1479656de1ffea85a1",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -2873,23 +2873,23 @@
         },
         {
             "name": "spatie/browsershot",
-            "version": "3.33.0",
+            "version": "3.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/browsershot.git",
-                "reference": "52578c132a13908a2c0a1b0368c48a2072ddb1bf"
+                "reference": "583ac1c20b8150a4132b2d94e837ffa9f40df652"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/browsershot/zipball/52578c132a13908a2c0a1b0368c48a2072ddb1bf",
-                "reference": "52578c132a13908a2c0a1b0368c48a2072ddb1bf",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/583ac1c20b8150a4132b2d94e837ffa9f40df652",
+                "reference": "583ac1c20b8150a4132b2d94e837ffa9f40df652",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "spatie/image": "^1.5.3",
                 "spatie/temporary-directory": "^1.1",
-                "symfony/process": "^4.2"
+                "symfony/process": "^4.2|^5.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.1|^7.5",
@@ -2925,7 +2925,7 @@
                 "screenshot",
                 "webpage"
             ],
-            "time": "2019-10-17T21:45:20+00:00"
+            "time": "2019-11-24T12:33:08+00:00"
         },
         {
             "name": "spatie/crawler",

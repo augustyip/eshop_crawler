@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\SupremeCoCrawler;
 use App\BroadwayCrawler;
+use App\SuningCrawler;
 
 class Kernel extends ConsoleKernel
 {
@@ -30,7 +31,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call(new SupremeCoCrawler)->dailyAt('01:00');
         $schedule->call(new BroadwayCrawler)->dailyAt('02:00');
-        // $schedule->call(new BroadwayCrawler);//->twiceDaily(1, 13);
+        $schedule->call(new SuningCrawler)->dailyAt('03:00');
     }
 
     /**

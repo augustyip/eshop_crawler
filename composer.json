@@ -13,6 +13,7 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
         "paquettg/php-html-parser": "^2.1",
+        "spatie/browsershot": "^3.33",
         "spatie/crawler": "^4.6",
         "tcg/voyager": "^1.3"
     },
