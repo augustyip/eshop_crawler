@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\SupremeCoCrawler;
 use App\BroadwayCrawler;
 use App\SuningCrawler;
+use App\CitylinkCrawler;
 
 class Kernel extends ConsoleKernel
 {
@@ -30,8 +31,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(new SupremeCoCrawler)->dailyAt('01:00');
+        $schedule->call(new SuningCrawler)->dailyAt('01:30');
         $schedule->call(new BroadwayCrawler)->dailyAt('02:00');
-        $schedule->call(new SuningCrawler)->dailyAt('03:00');
+        $schedule->call(new CitylinkCrawler)->dailyAt('03:00');
+        // $schedule->call(new CitylinkCrawler);//->dailyAt('03:00');
     }
 
     /**
