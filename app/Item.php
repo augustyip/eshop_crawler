@@ -29,4 +29,9 @@ class Item extends Model
         return $this->belongsTo('App\Shop');
     }
 
+
+    public function getPathBrowseAttribute()
+    {
+        return rtrim($this->shop->url, '/') . $this->path;
+    }
 }

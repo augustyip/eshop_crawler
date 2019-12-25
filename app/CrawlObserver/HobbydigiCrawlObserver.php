@@ -9,8 +9,8 @@ use PHPHtmlParser\Dom;
 use App\Item;
 
 
-class BroadwayCrawlObserver extends CrawlObserver {
-    private $shop_id = 2;
+class HobbydigiCrawlObserver extends CrawlObserver {
+    private $shop_id = 5;
 
     /**
      * Called when the crawler will crawl the url.
@@ -36,7 +36,7 @@ class BroadwayCrawlObserver extends CrawlObserver {
     ) {
         $dom = new Dom;
         $dom->loadStr((string) $response->getBody(), []);
-        $product_items = $dom->find('div.product-item');
+        $product_items = $dom->find('li.product-item');
         foreach($product_items as $el) {
 
             $link_el = $el->find('a.product-item-link')[0];
@@ -45,7 +45,16 @@ class BroadwayCrawlObserver extends CrawlObserver {
             $parsed_url = parse_url($link);
             $path = $parsed_url['path'];
 
-            $price_el = $el->find('span.final-price-wrapper')[0];
+            $id_el =  $el->find('div.price-final_price')[0];
+
+            if (empty($id_el)) {
+                continue;
+            }
+            $id = $id_el->getAttribute('data-product-id');
+            $price_el = $el->find('#product-price-' . $id)[0];
+            if (empty($price_el)) {
+                continue;
+            }
             $price = $price_el->getAttribute('data-price-amount');
 
             $hash = md5($path);
