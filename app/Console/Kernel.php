@@ -9,6 +9,7 @@ use App\BroadwayCrawler;
 use App\SuningCrawler;
 use App\CitylinkCrawler;
 use App\HobbydigiCrawler;
+use App\HgcCrawler;
 use App\DailyAlert;
 
 class Kernel extends ConsoleKernel
@@ -37,7 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(new BroadwayCrawler)->dailyAt('02:00');
         $schedule->call(new CitylinkCrawler)->dailyAt('03:00');
         $schedule->call(new HobbydigiCrawler)->dailyAt('04:00');
-        // $schedule->call(new DailyAlert);//->dailyAt('03:00');
+        // $schedule->call(nwew HgcCrawler);//->dailyAt('03:00');
     }
 
     /**
